@@ -36,13 +36,13 @@
 }
 
 .stat-available {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: #0a5a10;;
   color: white;
 }
 
 .stat-total {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background:  #eaea42;
+  color: black;
 }
 
 .stat-number {
@@ -201,7 +201,7 @@ details[open] .section-title::before {
 
 .availability-message.success {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
-  border: 2px solid #10b981;
+  border: 2px solid #0a5a10;;
 }
 
 .availability-message.unavailable {
@@ -224,7 +224,7 @@ details[open] .section-title::before {
 .booking-button {
   display: inline-block;
   padding: 1.25rem 3rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background:  #0a5a10;
   color: white;
   text-decoration: none;
   border-radius: 12px;

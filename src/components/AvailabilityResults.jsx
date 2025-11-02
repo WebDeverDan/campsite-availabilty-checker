@@ -7,7 +7,7 @@ function AvailabilityResults({ results }) {
     return (
       <div className="results-container">
         <div className="no-data">
-          <p>No availability data found.</p>
+          <p>No availability info found. If you think this is an error, check Recreation.gov to be sure!</p>
         </div>
       </div>
     )
@@ -30,7 +30,7 @@ function AvailabilityResults({ results }) {
   return (
     <div className="results-container">
       <div className="results-header">
-        <h2>Availability Results</h2>
+        <h2>Campsite Availability Results</h2>
         <p className="date-range">
           {new Date(startDate).toLocaleDateString('en-US', {
             month: 'long',
@@ -64,15 +64,17 @@ function AvailabilityResults({ results }) {
             <p>
               We found {availableSites.length} available {availableSites.length === 1 ? 'site' : 'sites'} for your dates.
             </p>
-          </div>
-          <a
+            <br/>
+            <a
             href={reservationUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="booking-button"
           >
-            Book Now on Recreation.gov
+            Book Now on Recreation.gov Before Someone Else Does!
           </a>
+          </div>
+          
         </div>
       ) : (
         <div className="booking-section">
