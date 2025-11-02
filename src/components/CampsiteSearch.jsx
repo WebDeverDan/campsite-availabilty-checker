@@ -16,26 +16,8 @@ function CampsiteSearch({ onSearch, loading }) {
   const [loadingCampgrounds, setLoadingCampgrounds] = useState(false)
   const [searchError, setSearchError] = useState(null)
   const [popularCampgrounds, setPopularCampgrounds] = useState([])
-  const [loadingPopular, setLoadingPopular] = useState(true)
   const searchTimeout = useRef(null)
 
-  useEffect(() => {
-    const loadPopularCampgrounds = async () => {
-      setLoadingPopular(true)
-      try {
-        const campgrounds = await getPopularCampgrounds(20)
-        setPopularCampgrounds(campgrounds)
-        console.log('Loaded popular campgrounds from API:', campgrounds)
-      } catch (error) {
-        console.error('Error loading popular campgrounds:', error)
-        setPopularCampgrounds([])
-      } finally {
-        setLoadingPopular(false)
-      }
-    }
-
-    loadPopularCampgrounds()
-  }, [])
 
   useEffect(() => {
     if (searchTimeout.current) {
@@ -160,31 +142,10 @@ function CampsiteSearch({ onSearch, loading }) {
   return (
     <div className="search-container">
       <form onSubmit={handleSubmit} className="search-form">
-        <div className="form-group">
-          <label htmlFor="campground-select">
-            Quick Select - Popular Campgrounds
-          </label>
-          <select
-            id="campground-select"
-            value={campsiteId}
-            onChange={handleCampgroundSelect}
-            className="form-select"
-            disabled={loading || loadingPopular}
-          >
-            <option value="">
-              {loadingPopular ? '-- Loading campgrounds... --' : '-- Choose a popular campground --'}
-            </option>
-            {popularCampgrounds.map(camp => (
-              <option key={camp.id} value={camp.id}>
-                {camp.name} ({camp.state})
-              </option>
-            ))}
-          </select>
-        </div>
-
+       
         <div className="form-group">
           <label htmlFor="state-select">
-            Or Browse by State
+            Browse by State (then choose campground name below)
           </label>
           <select
             id="state-select"
@@ -201,10 +162,14 @@ function CampsiteSearch({ onSearch, loading }) {
             ))}
           </select>
         </div>
-
+       <div>
+        <p className="generic-text">
+            -- OR --
+        </p>
+        </div>     
         <div className="form-group search-wrapper">
           <label htmlFor="campground-search">
-            Or Search by Campground Name
+            Enter Campground Name
           </label>
           <input
             type="text"

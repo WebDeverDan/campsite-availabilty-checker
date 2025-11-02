@@ -15,6 +15,7 @@
 
 .header-content {
   text-align: center;
+  color: black;
 }
 
 .app-header h1 {
@@ -26,7 +27,7 @@
 
 .app-header p {
   font-size: 1.1rem;
-  color: #666;
+  color: black;
 }
 
 .app-main {

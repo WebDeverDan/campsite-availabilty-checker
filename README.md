@@ -67,17 +67,6 @@ npm run build
 3. Click "Check Availability"
 4. View results with available sites highlighted in green
 
-## Popular Campgrounds Included
-
-- Upper Pines (Yosemite) - ID: 232447
-- Lower Pines (Yosemite) - ID: 232450
-- North Pines (Yosemite) - ID: 232449
-- Mather Campground (Grand Canyon) - ID: 232490
-- Chisos Basin (Big Bend) - ID: 232396
-- Jenny Lake (Grand Teton) - ID: 232267
-- Watchman (Zion) - ID: 251869
-- Smokemont (Great Smoky Mountains) - ID: 232493
-
 ## Technical Details
 
 - **Framework**: React 18

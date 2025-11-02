@@ -101,7 +101,8 @@ function App() {
       <header className="app-header">
         <div className="header-content">
           <h1>Campsite Availability Checker</h1>
-          <p>Sick of trying to navigate the Recreation.gov site to find an available campsite? Try here first, for a more friendly experience!</p>
+          <p>Sick of trying to navigate the Recreation.gov site to find an available campsite? </p>
+          <p>Try here first, for a less-frustrating experience!</p>
         </div>
       </header>
 
