@@ -16,11 +16,9 @@ function App() {
     setResults(null)
 
     try {
-      // Format dates for the API (YYYY-MM-DD)
       const start = startDate.toISOString().split('T')[0]
       const end = endDate.toISOString().split('T')[0]
 
-      // Get unique months to fetch
       const monthsToFetch = new Set()
       const currentDate = new Date(startDate)
       const finalDate = new Date(endDate)
@@ -33,11 +31,9 @@ function App() {
 
       console.log('Fetching months:', Array.from(monthsToFetch))
 
-      // Fetch all months
       const allData = { campsites: {} }
 
       for (const monthStart of monthsToFetch) {
-        // Recreation.gov API endpoint for availability (updated to use /month endpoint)
         const url = `https://www.recreation.gov/api/camps/availability/campground/${campsiteId}/month?start_date=${encodeURIComponent(monthStart)}`
 
         console.log('Fetching from URL:', url)
@@ -66,12 +62,10 @@ function App() {
 
         const monthData = await response.json()
 
-        // Merge campsite data from this month
         Object.keys(monthData.campsites || {}).forEach(campsiteId => {
           if (!allData.campsites[campsiteId]) {
             allData.campsites[campsiteId] = monthData.campsites[campsiteId]
           } else {
-            // Merge availabilities
             allData.campsites[campsiteId].availabilities = {
               ...allData.campsites[campsiteId].availabilities,
               ...monthData.campsites[campsiteId].availabilities

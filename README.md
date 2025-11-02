@@ -74,7 +74,6 @@ npm run build
 - **APIs**:
   - RIDB (Recreation Information Database) API for campground search
   - Recreation.gov API for availability data
-- **Styling**: Pure CSS with modern gradients and glassmorphism effects
 
 ## API Information
 
