@@ -52,6 +52,36 @@ Open your browser to the URL shown in the terminal (typically `http://localhost:
 npm run build
 ```
 
+## Deployment to GitHub Pages
+
+This app is configured to automatically deploy to GitHub Pages using GitHub Actions.
+
+### Setup Instructions:
+
+1. **Add API Key to GitHub Secrets**:
+   - Go to your GitHub repository
+   - Navigate to Settings > Secrets and variables > Actions
+   - Click "New repository secret"
+   - Name: `VITE_RECREATION_API_KEY`
+   - Value: Your Recreation.gov API key
+   - Click "Add secret"
+
+2. **Enable GitHub Pages**:
+   - Go to Settings > Pages
+   - Under "Build and deployment", set Source to "GitHub Actions"
+
+3. **Deploy**:
+   - Push to the `main` branch or manually trigger the workflow
+   - The app will automatically build and deploy to GitHub Pages
+   - Your site will be available at: `https://[username].github.io/campsite-availabilty-checker/`
+
+### Manual Deployment:
+
+You can also manually trigger the deployment:
+- Go to Actions tab in your repository
+- Select "Deploy to GitHub Pages" workflow
+- Click "Run workflow"
+
 ## How to Use
 
 ### Three Ways to Find Campgrounds:
