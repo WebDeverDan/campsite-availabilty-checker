@@ -190,7 +190,6 @@ export async function searchFacilitiesAutocomplete(searchTerm) {
 }
 
 /**
-
  * @param {number} limit - Number of campgrounds to fetch
  * @returns {Promise<Array>} Array of popular campgrounds
  */
@@ -201,7 +200,7 @@ export async function getPopularCampgrounds(limit = 20) {
   }
 
   try {
-    // Fetch campgrounds from popular states with national parks
+    // want to rework this later
     const popularStates = ['CA', 'AZ', 'UT', 'WY', 'TX', 'NC', 'TN']
     const allCampgrounds = []
 
@@ -214,7 +213,6 @@ export async function getPopularCampgrounds(limit = 20) {
       }
     }
 
-    // Format and return the first 'limit' campgrounds
     return allCampgrounds
       .slice(0, limit)
       .map(cg => ({
@@ -230,9 +228,7 @@ export async function getPopularCampgrounds(limit = 20) {
   }
 }
 
-/**
- * All US states and territories for filtering
- */
+
 export const US_STATES = [
   { code: 'AL', name: 'Alabama' },
   { code: 'AK', name: 'Alaska' },
