@@ -1,15 +1,5 @@
-/**
- * Recreation.gov API Service
- *
- * This service provides methods to interact with the Recreation.gov API
- *
- * API Documentation: https://ridb.recreation.gov/docs
- *
- * Note: You need an API key to use the RIDB API. Get one from:
- * https://ridb.recreation.gov/
- */
 
-// Use CORS proxy for development to avoid CORS issues
+
 const USE_CORS_PROXY = true
 const CORS_PROXY = 'https://corsproxy.io/?'
 const RIDB_BASE_URL = USE_CORS_PROXY
@@ -17,11 +7,8 @@ const RIDB_BASE_URL = USE_CORS_PROXY
   : 'https://ridb.recreation.gov/api/v1'
 const RECREATION_BASE_URL = 'https://www.recreation.gov/api'
 
-// Get API key from environment variable or use empty string
-// Users should set VITE_RECREATION_API_KEY in their .env file
 const API_KEY = import.meta.env.VITE_RECREATION_API_KEY || ''
 
-// Log API key status on module load (don't log the actual key for security)
 console.log('Recreation API initialized. API Key present:', !!API_KEY)
 
 /**
@@ -203,8 +190,7 @@ export async function searchFacilitiesAutocomplete(searchTerm) {
 }
 
 /**
- * Get popular/featured campgrounds from specific national parks
- * This fetches real data from the API instead of using hardcoded values
+
  * @param {number} limit - Number of campgrounds to fetch
  * @returns {Promise<Array>} Array of popular campgrounds
  */
