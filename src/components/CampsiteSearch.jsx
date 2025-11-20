@@ -163,7 +163,7 @@ function CampsiteSearch({ onSearch, loading }) {
 
   return (
     <div className="search-container">
-      <h3 class="search-header">Choose your state (optional), then campground, then desired dates to find available sites.</h3>
+      <h3 class="search-header">Choose your state, then campground, then desired dates to find available sites.</h3>
 
       <form onSubmit={handleSubmit} className="search-form">
        
