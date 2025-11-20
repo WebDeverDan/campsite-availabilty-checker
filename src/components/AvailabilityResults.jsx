@@ -7,7 +7,7 @@ function AvailabilityResults({ results }) {
     return (
       <div className="results-container">
         <div className="no-data">
-          <p>No availability info found. If you think this is an error, check Recreation.gov to be sure!</p>
+          <p>No campsite info found. If you think this is an error, check Recreation.gov to be sure. Sorry!</p>
         </div>
       </div>
     )
@@ -32,6 +32,8 @@ function AvailabilityResults({ results }) {
       <div className="results-header">
         <h2>Campsite Availability Results</h2>
         <p className="date-range">
+
+          
           {new Date(startDate).toLocaleDateString('en-US', {
             month: 'long',
             day: 'numeric',
@@ -44,17 +46,6 @@ function AvailabilityResults({ results }) {
             year: 'numeric'
           })}
         </p>
-      </div>
-
-      <div className="summary-stats">
-        <div className="stat-card stat-available">
-          <div className="stat-number">{availableSites.length}</div>
-          <div className="stat-label">Available Sites</div>
-        </div>
-        <div className="stat-card stat-total">
-          <div className="stat-number">{campsites.length}</div>
-          <div className="stat-label">Total Sites</div>
-        </div>
       </div>
 
       {availableSites.length > 0 ? (
@@ -94,6 +85,20 @@ function AvailabilityResults({ results }) {
           </a>
         </div>
       )}
+      <br/>
+
+      <div className="summary-stats">
+        <div className="stat-card stat-available">
+          <div className="stat-number">{availableSites.length}</div>
+          <div className="stat-label">Available Sites</div>
+        </div>
+        <div className="stat-card stat-total">
+          <div className="stat-number">{campsites.length}</div>
+          <div className="stat-label">Total Sites</div>
+        </div>
+      </div>
+
+      
 
       {campsites.length === 0 && (
         <div className="no-data">

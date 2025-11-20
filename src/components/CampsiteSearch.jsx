@@ -16,7 +16,10 @@ function CampsiteSearch({ onSearch, loading }) {
   const [loadingCampgrounds, setLoadingCampgrounds] = useState(false)
   const [searchError, setSearchError] = useState(null)
   const [popularCampgrounds, setPopularCampgrounds] = useState([])
+  const [startDateOpen, setStartDateOpen] = useState(false)
+  const [endDateOpen, setEndDateOpen] = useState(false)
   const searchTimeout = useRef(null)
+  const justSelected = useRef(false)
 
 
   useEffect(() => {
@@ -26,6 +29,12 @@ function CampsiteSearch({ onSearch, loading }) {
 
     if (campgroundName.length < 2) {
       setSearchResults([])
+      setShowResults(false)
+      return
+    }
+
+    // Don't search if user just selected something
+    if (justSelected.current) {
       return
     }
 
@@ -35,7 +44,10 @@ function CampsiteSearch({ onSearch, loading }) {
       try {
         const results = await searchFacilitiesAutocomplete(campgroundName)
         setSearchResults(results)
-        setShowResults(true)
+        // Only show results if user hasn't made a selection
+        if (!campsiteId) {
+          setShowResults(true)
+        }
         if (results.length === 0) {
           setSearchError('No campgrounds found. Try a different search term.')
         }
@@ -53,12 +65,13 @@ function CampsiteSearch({ onSearch, loading }) {
         clearTimeout(searchTimeout.current)
       }
     }
-  }, [campgroundName])
+  }, [campgroundName, campsiteId])
 
   const handleStateChange = async (state) => {
     setSelectedState(state)
     if (!state) {
       setSearchResults([])
+      setShowResults(false)
       return
     }
 
@@ -74,7 +87,10 @@ function CampsiteSearch({ onSearch, loading }) {
         type: cg.FacilityTypeDescription,
       }))
       setSearchResults(formatted)
-      setShowResults(true)
+      // Only show results if user hasn't made a selection yet
+      if (!campsiteId) {
+        setShowResults(true)
+      }
       if (formatted.length === 0) {
         setSearchError('No campgrounds found in this state.')
       }
@@ -116,11 +132,17 @@ function CampsiteSearch({ onSearch, loading }) {
   }
 
   const handleSearchResultSelect = (result) => {
+    justSelected.current = true
     setCampsiteId(result.id.toString())
     setCampgroundName(result.name)
+    setSearchResults([]) // Clear results first
     setShowResults(false)
-    setSearchResults([])
-    setSelectedState('') 
+    setSelectedState('')
+
+    // Reset the flag after a short delay
+    setTimeout(() => {
+      justSelected.current = false
+    }, 300)
   }
 
   const handleSearchInputChange = (e) => {
@@ -141,11 +163,13 @@ function CampsiteSearch({ onSearch, loading }) {
 
   return (
     <div className="search-container">
+      <h3 class="search-header">Choose your state (optional), then campground, then desired dates to find available sites.</h3>
+
       <form onSubmit={handleSubmit} className="search-form">
        
         <div className="form-group">
           <label htmlFor="state-select">
-            Browse by State (then choose campground name below)
+            1. Browse by State (optional)
           </label>
           <select
             id="state-select"
@@ -161,22 +185,21 @@ function CampsiteSearch({ onSearch, loading }) {
               </option>
             ))}
           </select>
-        </div>
-       <div>
-        <p className="generic-text">
-            -- OR --
-        </p>
-        </div>     
+        </div>   
         <div className="form-group search-wrapper">
           <label htmlFor="campground-search">
-            Enter Campground Name
+            2. Enter Campground Name
           </label>
           <input
             type="text"
             id="campground-search"
             value={campgroundName}
             onChange={handleSearchInputChange}
-            onFocus={() => searchResults.length > 0 && !campsiteId && setShowResults(true)}
+            onFocus={() => {
+              if (!justSelected.current && searchResults.length > 0 && !campsiteId) {
+                setShowResults(true)
+              }
+            }}
             onBlur={handleSearchBlur}
             placeholder="Type to search (e.g., Yosemite, Grand Canyon)..."
             className="form-input"
@@ -216,12 +239,20 @@ function CampsiteSearch({ onSearch, loading }) {
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="start-date">
-              Start Date
+              3. Start Date
             </label>
             <DatePicker
               id="start-date"
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) => {
+                setStartDate(date)
+                setStartDateOpen(false)
+              }}
+              onCalendarClose={() => setStartDateOpen(false)}
+              onCalendarOpen={() => setStartDateOpen(true)}
+              open={startDateOpen}
+              onClickOutside={() => setStartDateOpen(false)}
+              onInputClick={() => setStartDateOpen(true)}
               selectsStart
               startDate={startDate}
               endDate={endDate}
@@ -236,12 +267,20 @@ function CampsiteSearch({ onSearch, loading }) {
 
           <div className="form-group">
             <label htmlFor="end-date">
-              End Date
+              4. End Date
             </label>
             <DatePicker
               id="end-date"
               selected={endDate}
-              onChange={(date) => setEndDate(date)}
+              onChange={(date) => {
+                setEndDate(date)
+                setEndDateOpen(false)
+              }}
+              onCalendarClose={() => setEndDateOpen(false)}
+              onCalendarOpen={() => setEndDateOpen(true)}
+              open={endDateOpen}
+              onClickOutside={() => setEndDateOpen(false)}
+              onInputClick={() => setEndDateOpen(true)}
               selectsEnd
               startDate={startDate}
               endDate={endDate}

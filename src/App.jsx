@@ -95,8 +95,7 @@ function App() {
       <header className="app-header">
         <div className="header-content">
           <h1>Campsite Availability Checker</h1>
-          <p>Sick of trying to navigate the Recreation.gov website to see if anything is available?</p>
-          <p>Try here first, for a better experience!</p>
+          <h3>A simpler place to start when searching for a campsite on Recreation.gov!</h3>
         </div>
       </header>
 
@@ -121,10 +120,7 @@ function App() {
         )}
       </main>
 
-      <footer className="app-footer">
-        <p>Data from Recreation.gov API</p>
-      </footer>
-    </div>
+     </div>
   )
 }
 
