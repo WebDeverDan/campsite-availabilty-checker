@@ -94,11 +94,11 @@
 
 @media (max-width: 768px) {
   .app-header h1 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .app-header p {
-    font-size: 1rem;
+    font-size: .5rem;
   }
 
   #root {
