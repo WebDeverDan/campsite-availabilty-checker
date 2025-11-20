@@ -95,7 +95,7 @@ function App() {
       <header className="app-header">
         <div className="header-content">
           <h1>Campsite Availability Checker</h1>
-          <h3>A simpler place to start when searching for a campsite on Recreation.gov!</h3>
+          <h3>A simpler place to start than searching for a campsite on Recreation.gov!</h3>
         </div>
       </header>
 
