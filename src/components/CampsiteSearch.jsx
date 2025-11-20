@@ -16,10 +16,10 @@ function CampsiteSearch({ onSearch, loading }) {
   const [loadingCampgrounds, setLoadingCampgrounds] = useState(false)
   const [searchError, setSearchError] = useState(null)
   const [popularCampgrounds, setPopularCampgrounds] = useState([])
-  const [startDateOpen, setStartDateOpen] = useState(false)
-  const [endDateOpen, setEndDateOpen] = useState(false)
   const searchTimeout = useRef(null)
   const justSelected = useRef(false)
+  const startDateRef = useRef(null)
+  const endDateRef = useRef(null)
 
 
   useEffect(() => {
@@ -242,17 +242,16 @@ function CampsiteSearch({ onSearch, loading }) {
               3. Start Date
             </label>
             <DatePicker
+              ref={startDateRef}
               id="start-date"
               selected={startDate}
               onChange={(date) => {
                 setStartDate(date)
-                setStartDateOpen(false)
+                // Force close the calendar
+                if (startDateRef.current) {
+                  startDateRef.current.setOpen(false)
+                }
               }}
-              onCalendarClose={() => setStartDateOpen(false)}
-              onCalendarOpen={() => setStartDateOpen(true)}
-              open={startDateOpen}
-              onClickOutside={() => setStartDateOpen(false)}
-              onInputClick={() => setStartDateOpen(true)}
               selectsStart
               startDate={startDate}
               endDate={endDate}
@@ -262,6 +261,7 @@ function CampsiteSearch({ onSearch, loading }) {
               dateFormat="MMM d, yyyy"
               disabled={loading}
               showPopperArrow={false}
+              shouldCloseOnSelect={true}
             />
           </div>
 
@@ -270,17 +270,16 @@ function CampsiteSearch({ onSearch, loading }) {
               4. End Date
             </label>
             <DatePicker
+              ref={endDateRef}
               id="end-date"
               selected={endDate}
               onChange={(date) => {
                 setEndDate(date)
-                setEndDateOpen(false)
+                // Force close the calendar
+                if (endDateRef.current) {
+                  endDateRef.current.setOpen(false)
+                }
               }}
-              onCalendarClose={() => setEndDateOpen(false)}
-              onCalendarOpen={() => setEndDateOpen(true)}
-              open={endDateOpen}
-              onClickOutside={() => setEndDateOpen(false)}
-              onInputClick={() => setEndDateOpen(true)}
               selectsEnd
               startDate={startDate}
               endDate={endDate}
@@ -290,6 +289,7 @@ function CampsiteSearch({ onSearch, loading }) {
               dateFormat="MMM d, yyyy"
               disabled={loading || !startDate}
               showPopperArrow={false}
+              shouldCloseOnSelect={true}
             />
           </div>
         </div>

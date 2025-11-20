@@ -352,4 +352,8 @@
   .search-results {
     max-height: 200px;
   }
+
+  .submit-button {
+    width: 75%;
+  }
 }
